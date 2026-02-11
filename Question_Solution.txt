@@ -1,0 +1,24 @@
+Question 1 – Explain simple words, what logic did you apply.
+
+Solution:
+First I treated the task like a small data cleaning pipeline then analyse the flow and understand the structure of sample file(signup.xls).
+The file was not properly structured, so I first fix it into proper columns like name, email, signup_date, plan, and notes and then load the structure as per requirement.
+
+Then I applied following below steps:
+1. I cleaned the basic data by removing extra spaces and converting all emails to lowercase.
+2. In continuation I converted all signup dates into one standard format (YYYY-MM-DD) as per requires so that the CRM can handle them properly.
+3. Then I identified low-quality leads such as test users, records with IGNORE in notes, invalid emails, or wrong dates. Instead of deleting them permanently, I moved them into a separate quarantine.csv file so that the data should not be losses.
+4. After I removed duplicate users based on email, since email is the most reliable unique identifier as shown and also email cannot be same for two user.
+5. If a user signed up for both Plan A and Plan B, I kept the most recent signup and added a flag is_multi_plan = True.
+
+Finally, I exported two files:
+1. members_final.csv contains cleaned, validated, and deduplicated user data ready to be imported into the CRM.
+2. quarantine.csv contains test, invalid, or suspicious records that were filtered out to protect data quality.
+
+Question 2 – What was the most frustrating part of the data, and how would you explain to a non-technical manager why we had to delete 20% of the leads?
+
+Solution:
+The most frustrating part was handling inconsistent data formats, especially dates and rows that were not properly structured. Some entries had mixed date formats and some rows were test data, which required extra validation logic also when open in excel it showing not the correct format of date as per the question require.
+
+I would explain to a non-technical manager about why we had to delete 20% of the leads then I would say - we are not losing any data from deleting the data what actually we are doing is that we only removed test data, invalid emails, and clearly incorrect records. Keeping those leads would reduce the quality of the CRM database and could negatively impact marketing campaigns, reporting accuracy, and email deliverability. We did not remove real customers. 
+Just giving the user a proper well form data having no duplicates, no mismatching of data also there will be no mixing of data, and one important as per the client and server the user get the real data from the server side and stored in a proper formatted document.
